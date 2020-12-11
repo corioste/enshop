@@ -83,7 +83,7 @@ def get_products_html_for_website_by_category_name_and_group(category_name, grou
 def get_html_for_items(items):
     html = []
     for item in items:
-        html.append(frappe.render_template('erpnext/www/all-products/item_row.html', {
+        html.append(frappe.render_template('global_app/www/all-products/item_col.html', {
             'item': item
         }))
     return html
