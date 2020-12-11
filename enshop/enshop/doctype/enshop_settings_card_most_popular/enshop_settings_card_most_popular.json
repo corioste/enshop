@@ -1,0 +1,53 @@
+{
+ "creation": "2020-11-25 05:48:07.684546",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "label",
+  "hyperlink",
+  "imageurl"
+ ],
+ "fields": [
+  {
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label",
+   "reqd": 1
+  },
+  {
+   "fieldname": "hyperlink",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Hyperlink",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "imageurl",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Image"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-11-25 06:24:15.719022",
+ "modified_by": "Administrator",
+ "module": "Enshop",
+ "name": "Enshop Settings Card Most Popular",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

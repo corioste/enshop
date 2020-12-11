@@ -1,0 +1,45 @@
+{
+ "creation": "2020-12-03 18:40:36.584924",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_group",
+  "label",
+  "imageurl"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Group",
+   "options": "Item Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label",
+   "reqd": 1
+  },
+  {
+   "fieldname": "imageurl",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Image"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-12-03 22:07:59.773699",
+ "modified_by": "Administrator",
+ "module": "Enshop",
+ "name": "Enshop Group Card",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
