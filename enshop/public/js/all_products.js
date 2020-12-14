@@ -13,14 +13,14 @@ $(() => {
 				const category_name = urlParams.get("categories")
 				const item_group_name = urlParams.get("item_group")
 				
-
+				
 				if (category_name && item_group_name) {
 
 					const args = {
 						category_name: category_name,
 						group_name: item_group_name
 					}
-					console.log(category_name)
+					
 					frappe.call('enshop.api.item_filters.get_products_html_for_website_by_category_name_and_group', args)
 						.then(r => {
 							if (r.message) {

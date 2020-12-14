@@ -1,5 +1,6 @@
 import frappe
 
+
 @frappe.whitelist(allow_guest=True)
 def get_categories_from_group(group_name):
 
@@ -54,30 +55,35 @@ def get_products_html_for_website_by_category_name(category_name):
 
 @frappe.whitelist(allow_guest=True)
 def get_products_html_for_website_by_category_name_and_group(category_name, group_name):
+	category_name = category_name.replace("&amp;","&")
+	
+	print()
+	params = ""
+	
+	sql_group_child = get_sql_parent_child_group(group_name)
 
-    params = ""
+	group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
 
-    sql_group_child = get_sql_parent_child_group(group_name)
+	for child_list in group_child_list:
+		child_name = child_list.name
+		params = params + 'ti.item_group = "'+child_name+'"'
+		if(group_child_list[-1] != child_list):
+			params = params + " || "
 
-    group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
+	sql_query = get_sql_query_group(category_name, params)
+	
 
-    for child_list in group_child_list:
-        child_name = child_list.name
-        params = params + 'ti.item_group = "'+child_name+'"'
-        if(group_child_list[-1] != child_list):
-            params = params + " || "
+	items = frappe.db.sql(sql_query, as_dict=1)
 
-    sql_query = get_sql_query_group(category_name, params)
+	html = ''.join(get_html_for_items(items))
+	
+	
+	if not items:
+		html = frappe.render_template('erpnext/www/all-products/not_found.html', {})
 
-    items = frappe.db.sql(sql_query, as_dict=1)
+	
 
-    html = ''.join(get_html_for_items(items))
-
-    if not items:
-        html = frappe.render_template(
-            'erpnext/www/all-products/not_found.html', {})
-
-    return html
+	return html
 
 
 def get_html_for_items(items):
