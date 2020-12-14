@@ -12,6 +12,7 @@ $(() => {
 				const urlParams = new URLSearchParams(queryString);
 				const category_name = urlParams.get("categories")
 				const item_group_name = urlParams.get("item_group")
+				
 
 				if (category_name && item_group_name) {
 
@@ -66,7 +67,7 @@ $(() => {
 				const args = {
 					group_name: item_group_name
 				}
-
+				
 				frappe.call('enshop.api.item_filters.get_categories_from_group', args)
 					.then(r => {
 						if (r.message) {
@@ -75,7 +76,7 @@ $(() => {
 							const queryString = window.location.search
 
 							$('.select-category').on('click', function () {
-								const new_params = queryString + "&categories=" + this.text.trim()
+								const new_params = queryString + "&categories=" + encodeURIComponent(this.text.trim())
 								window.location = 'all-products' + new_params
 							});
 						} else {
