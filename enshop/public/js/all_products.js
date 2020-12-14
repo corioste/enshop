@@ -19,6 +19,7 @@ $(() => {
 						category_name: category_name,
 						group_name: item_group_name
 					}
+					console.log(category_name)
 					frappe.call('enshop.api.item_filters.get_products_html_for_website_by_category_name_and_group', args)
 						.then(r => {
 							if (r.message) {
@@ -88,3 +89,13 @@ $(() => {
 	}
 	new ProductListing();
 })
+
+const getQueryParams = ( name, url ) => {
+  
+	name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  };
