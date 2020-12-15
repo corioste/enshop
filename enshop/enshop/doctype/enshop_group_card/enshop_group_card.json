@@ -6,7 +6,8 @@
  "field_order": [
   "item_group",
   "label",
-  "imageurl"
+  "imageurl",
+  "image_file"
  ],
  "fields": [
   {
@@ -28,11 +29,16 @@
    "fieldname": "imageurl",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Image"
+   "label": "Image URL"
+  },
+  {
+   "fieldname": "image_file",
+   "fieldtype": "Attach Image",
+   "label": "Image File"
   }
  ],
  "istable": 1,
- "modified": "2020-12-03 22:07:59.773699",
+ "modified": "2020-12-14 17:50:38.079754",
  "modified_by": "Administrator",
  "module": "Enshop",
  "name": "Enshop Group Card",

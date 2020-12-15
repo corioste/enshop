@@ -7,7 +7,8 @@
   "item_code",
   "label",
   "hyperlink",
-  "imageurl"
+  "imageurl",
+  "image_filea"
  ],
  "fields": [
   {
@@ -36,11 +37,16 @@
    "fieldname": "imageurl",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Image"
+   "label": "Image URL"
+  },
+  {
+   "fieldname": "image_filea",
+   "fieldtype": "Attach Image",
+   "label": "Image File"
   }
  ],
  "istable": 1,
- "modified": "2020-11-25 06:24:15.719022",
+ "modified": "2020-12-14 17:50:47.027313",
  "modified_by": "Administrator",
  "module": "Enshop",
  "name": "Enshop Settings Card Most Popular",

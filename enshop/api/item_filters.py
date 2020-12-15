@@ -57,7 +57,6 @@ def get_products_html_for_website_by_category_name(category_name):
 def get_products_html_for_website_by_category_name_and_group(category_name, group_name):
 	category_name = category_name.replace("&amp;","&")
 	
-	print()
 	params = ""
 	
 	sql_group_child = get_sql_parent_child_group(group_name)

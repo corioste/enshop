@@ -29,11 +29,14 @@ frappe.ui.form.on('Enshop Settings Card Most Popular', {
 });
 
 frappe.ui.form.on('Enshop Settings Card', {
-	label: function (cdt,cdn) {
-		
-	
+	label: function (frm,cdt,cdn) {
 		frappe.model.set_value(cdt, cdn, "imageurl", "https://via.placeholder.com/400x250")
-		
+	},
+	image_file: function(frm,cdt,cdn){
+		const child_doc = frappe.get_doc(cdt,cdn);
+		const current_index = child_doc.idx - 1
+		const file_name = frm.doc.featured_categories_cards[current_index].image_file
+		frappe.model.set_value(cdt, cdn, "imageurl", file_name)
 	}
 });
 
@@ -41,6 +44,7 @@ frappe.ui.form.on('Enshop Group Card', {
 	item_group: function (frm,cdt,cdn) {
 
 		const child_doc = frappe.get_doc(cdt,cdn);
+		
 		const current_index = child_doc.idx - 1
 		const item_group = frm.doc.featured_item_group[current_index].item_group
 
