@@ -52,5 +52,27 @@ frappe.ui.form.on('Enshop Group Card', {
 		frappe.model.set_value(cdt, cdn, "imageurl", "https://via.placeholder.com/400x250")
 		
 		
+		
+	},
+	image_file: function(frm,cdt,cdn){
+		const child_doc = frappe.get_doc(cdt,cdn);
+		const current_index = child_doc.idx - 1
+		console.log
+		const file_name = frm.doc.featured_item_group[current_index].image_file
+		console.log(file_name)
+		frappe.model.set_value(cdt, cdn, "imageurl", file_name)
+	}
+});
+
+
+frappe.ui.form.on('Enshop Settings Banner', {
+	
+	image_file: function(frm,cdt,cdn){
+		const child_doc = frappe.get_doc(cdt,cdn);
+		const current_index = child_doc.idx - 1
+		console.log
+		const file_name = frm.doc.banner[current_index].image_file
+		console.log(file_name)
+		frappe.model.set_value(cdt, cdn, "imageurl", file_name)
 	}
 });

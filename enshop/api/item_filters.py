@@ -4,37 +4,35 @@ import frappe
 @frappe.whitelist(allow_guest=True)
 def get_categories_from_group(group_name):
 
-	final_category_list = []
+    final_category_list = []
 
-	params = ""
+    params = ""
 
-	sql_group_child = get_sql_parent_child_group(group_name)
+    sql_group_child = get_sql_parent_child_group(group_name)
 
-	group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
-	
-	for child_list in group_child_list:
-		child_name = child_list.name
-		params = params + 'ti.item_group = "'+child_name+'"'
-		if(group_child_list[-1] != child_list):
-			params = params + " || "
+    group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
 
-	categories = get_categories_from_group_parent(params)
+    for child_list in group_child_list:
+        child_name = child_list.name
+        params = params + 'ti.item_group = "'+child_name+'"'
+        if(group_child_list[-1] != child_list):
+            params = params + " || "
 
-	categories_list = frappe.db.sql(categories, as_dict=1)
+    categories = get_categories_from_group_parent(params)
 
+    categories_list = frappe.db.sql(categories, as_dict=1)
 
-	all_categories = _get_featured_cards("featured_categories_cards")
+    all_categories = _get_featured_cards("featured_categories_cards")
 
-	for category_x in all_categories:
-		for category_y in categories_list:
-			if category_x.label == category_y.category_name:
-				final_category_list.append(category_x)
+    for category_x in all_categories:
+        for category_y in categories_list:
+            if category_x.label == category_y.category_name:
+                final_category_list.append(category_x)
 
-	html = frappe.render_template('enshop/www/filter-categories/categories-row.html',{"featured_categories_cards": final_category_list})
+    html = frappe.render_template('enshop/www/filter-categories/categories-row.html', {
+                                  "featured_categories_cards": final_category_list})
 
-	return html
-	
-
+    return html
 
 
 @frappe.whitelist(allow_guest=True)
@@ -55,34 +53,31 @@ def get_products_html_for_website_by_category_name(category_name):
 
 @frappe.whitelist(allow_guest=True)
 def get_products_html_for_website_by_category_name_and_group(category_name, group_name):
-	category_name = category_name.replace("&amp;","&")
-	
-	params = ""
-	
-	sql_group_child = get_sql_parent_child_group(group_name)
+    category_name = category_name.replace("&amp;", "&")
 
-	group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
+    params = ""
 
-	for child_list in group_child_list:
-		child_name = child_list.name
-		params = params + 'ti.item_group = "'+child_name+'"'
-		if(group_child_list[-1] != child_list):
-			params = params + " || "
+    sql_group_child = get_sql_parent_child_group(group_name)
 
-	sql_query = get_sql_query_group(category_name, params)
-	
+    group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
 
-	items = frappe.db.sql(sql_query, as_dict=1)
+    for child_list in group_child_list:
+        child_name = child_list.name
+        params = params + 'ti.item_group = "'+child_name+'"'
+        if(group_child_list[-1] != child_list):
+            params = params + " || "
 
-	html = ''.join(get_html_for_items(items))
-	
-	
-	if not items:
-		html = frappe.render_template('erpnext/www/all-products/not_found.html', {})
+    sql_query = get_sql_query_group(category_name, params)
 
-	
+    items = frappe.db.sql(sql_query, as_dict=1)
 
-	return html
+    html = ''.join(get_html_for_items(items))
+
+    if not items:
+        html = frappe.render_template(
+            'erpnext/www/all-products/not_found.html', {})
+
+    return html
 
 
 def get_html_for_items(items):
@@ -129,6 +124,7 @@ def get_sql_query_group(category_name, params):
 def get_sql_parent_child_group(parent_name):
     return '''SELECT name FROM `tabItem Group` where parent_item_group = "{0}"'''.format(parent_name)
 
+
 def get_categories_from_group_parent(group_names):
     return '''SELECT  DISTINCT tcc.category_name  
 		FROM  tabItem AS ti 
@@ -136,10 +132,10 @@ def get_categories_from_group_parent(group_names):
 		ON ti.name = tcc.parent 
 		WHERE {0}'''.format(group_names)
 
+
 def _get_featured_cards(parentfield):
     return frappe.get_all(
         "Enshop Settings Card",
-        fields=["label","imageurl"],
+        fields=["label", "imageurl"],
         filters={"parentfield": parentfield}
     )
-
