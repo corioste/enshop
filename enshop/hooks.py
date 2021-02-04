@@ -129,3 +129,11 @@ web_include_js = "/assets/enshop/js/all_products.js"
 # override_doctype_dashboards = {
 # 	"Task": "enshop.task.get_dashboard_data"
 # }
+
+override_whitelisted_methods = {
+    "erpnext.shopping_cart.cart.place_order": "enshop.api.cart.place_order"
+}
+
+update_website_context = (
+    "enshop.api.shopping_cart.update_website_context"
+)
