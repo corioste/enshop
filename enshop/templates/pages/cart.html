@@ -45,19 +45,7 @@
     <p class="text-muted">{{ _('Your cart is Empty') }}</p>
     {% endif %}
 
-    {% if doc.items %}
-    <div class="place-order-container">
-        {% if cart_settings.enable_checkout %}
-        <button class="btn btn-primary btn-place-order" type="button">
-            {{ _("Place Order") }}
-        </button>
-        {% else %}
-        <button class="btn btn-primary btn-request-for-quotation" type="button">
-            {{ _("Request for Quotation") }}
-        </button>
-        {% endif %}
-    </div>
-    {% endif %}
+
 
     {% if doc.items %}
     {% if doc.tc_name %}
@@ -87,28 +75,61 @@
     </div>
     {% endif %}
     <div class="cart-addresses mt-5">
-        <div class="mb-3" data-section="shipping-address">
-            <h6 class="text-uppercase">{{ _("Shipping Method") }}</h6>
-            <select id="shipping_service" class="form-control text-right cart-qty border-secondary" style="width: 50%;">
-                {% for shipping in shipping_service %}
-                <option value="{{shipping.name}}">{{shipping.name}}</option>
-                {% endfor %}
+        <div class="container">
 
-            </select> 
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <h6 class="text-uppercase">{{ _("Shipping Address") }}</h6>
+                    {% include "templates/includes/cart/cart_address.html" %}
+                </div>
+
+                <div class="col-sm-6" ">
+                    <div class=" mb-3" data-section="shipping-address">
+
+                    <h6 class="text-uppercase">{{ _("Shipping Method") }}</h6>
+                    <select id="shipping_service" class="form-control text-right cart-qty border-secondary"
+                        style="width: 100%;">
+                        {% for shipping in shipping_service %}
+                        <option value="{{shipping.name}}">{{shipping.name}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <div class="mb-3" data-section="shipping-address">
+                    <h6 class="text-uppercase">{{ _("Estimated Shipment Cost") }}</h6>
+                    <input id="po_no" readonly class="form-control cart-qty border-secondary" style="width: 100%;" />
+
+                </div>
+
+                {% if doc.items %}
+                <div class="place-order-container">
+                    {% if cart_settings.enable_checkout %}
+                    <button class="btn btn-primary btn-place-order" type="button">
+                        {{ _("Place Order") }}
+                    </button>
+                    {% else %}
+                    <button class="btn btn-primary btn-request-for-quotation" type="button">
+                        {{ _("Request for Quotation") }}
+                    </button>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+            </div>
         </div>
-        
-        <div class="mb-3" data-section="shipping-address">
-            <h6 class="text-uppercase">{{ _("Purchase Order #") }}</h6>
-            <input id="po_no" class="form-control cart-qty border-secondary" style="width: 50%;" />
-        
-        </div>
-       
-        {% include "templates/includes/cart/cart_address.html" %}
     </div>
-    {% endif %}
+
 
 
 </div>
+{% endif %}
+
+
+</div>
+
+
 
 <div class="row mt-5">
     <div class="col-12">
