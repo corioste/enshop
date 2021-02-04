@@ -11,7 +11,8 @@ app_color = "grey"
 app_email = "hello@bai.ph"
 app_license = "MIT"
 
-update_website_context = ["enshop.utils.update_website_context"]
+update_website_context = ["enshop.utils.update_website_context",
+                          "enshop.api.shopping_cart.update_website_context"]
 
 # Includes in <head>
 # ------------------
@@ -133,7 +134,3 @@ web_include_js = "/assets/enshop/js/all_products.js"
 override_whitelisted_methods = {
     "erpnext.shopping_cart.cart.place_order": "enshop.api.cart.place_order"
 }
-
-update_website_context = (
-    "enshop.api.shopping_cart.update_website_context"
-)
