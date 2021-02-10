@@ -134,3 +134,7 @@ web_include_js = "/assets/enshop/js/all_products.js"
 override_whitelisted_methods = {
     "erpnext.shopping_cart.cart.place_order": "enshop.api.cart.place_order"
 }
+
+has_website_permission = {
+    "Address": ""
+}

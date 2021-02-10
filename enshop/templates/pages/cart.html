@@ -97,11 +97,25 @@
                     </select>
                 </div>
 
+
+
+
                 <div class="mb-3" data-section="shipping-address">
                     <h6 class="text-uppercase">{{ _("Estimated Shipment Cost") }}</h6>
-                    <input id="po_no" readonly class="form-control cart-qty border-secondary" style="width: 100%;" />
+                    <input id="estimate-shipment" readonly class="form-control cart-qty border-secondary"
+                        style="width: 100%;" />
 
                 </div>
+
+                {% if doc.items %}
+                <div class="mb-3 place-order-container">
+                    {% if cart_settings.enable_checkout %}
+                    <button class="btn btn-primary btn-calculate-cost" type="button">
+                        {{ _("Calculate Shipment Cost") }}
+                    </button>
+                    {% endif %}
+                </div>
+                {% endif %}
 
                 {% if doc.items %}
                 <div class="place-order-container">
