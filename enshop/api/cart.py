@@ -55,6 +55,7 @@ def place_order(shipping_service, po_no):
 
 def make_invoice(ref_doc, ref_name):
     ref_doc = frappe.get_doc(ref_doc, ref_name)
+    make_channel_controller(ref_doc.po_no, ref_doc.items, ref_doc)
     if (hasattr(ref_doc, "order_type") and getattr(ref_doc, "order_type") == "Shopping Cart"):
         from erpnext.selling.doctype.sales_order.sales_order import make_sales_invoice
         si = make_sales_invoice(ref_name, ignore_permissions=True)
@@ -62,3 +63,32 @@ def make_invoice(ref_doc, ref_name):
         si.submit()
 
     return si.name
+
+
+def make_channel_controller(order_id, items, so_doc):
+    new_cha_cont = frappe.new_doc("Channel Controller")
+    new_cha_cont.order_id = order_id
+    new_cha_cont.channel = "GAS-WEB"
+    new_cha_cont.controller_id = "GAS-WEB" + "_" + order_id
+
+    address = frappe.get_doc("Address", so_doc.shipping_address_name)
+
+    new_cha_cont.ship_to = so_doc.name
+    new_cha_cont.address_line_1 = address.address_line1
+    new_cha_cont.address_line_2 = address.address_line2
+    new_cha_cont.city = address.city
+    new_cha_cont.state = address.state
+    new_cha_cont.pincode = address.pincode
+    new_cha_cont.shipping_address_validation = address.validation_status
+    new_cha_cont.classification = address.classification
+    new_cha_cont.customer = so_doc.name
+
+    for item in items:
+        new_cha_cont.append("items", {
+            "item_code":  item.item_code
+        })
+
+    new_cha_cont.status = "Received"
+
+    new_cha_cont.save()
+    frappe.db.commit()

@@ -30,7 +30,7 @@ web_include_js = "/assets/enshop/js/all_products.js"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Price List": "public/js/price_list.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -138,3 +138,19 @@ override_whitelisted_methods = {
 has_website_permission = {
     "Address": ""
 }
+
+fixtures = [
+    {
+        'doctype': 'Custom Field',
+        'filters': [
+            [
+                "name",
+                'in',
+                [
+                    'Price List-item_group',
+                    'Price List-item_group_price'
+                ]
+            ]
+        ]
+    }
+]
