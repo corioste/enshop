@@ -3,9 +3,12 @@ $(() => {
 
 	class ProductListing {
 		constructor() {
+			
 			this.bind_filters();
+			this.bind_search();
 		}
 		bind_filters() {
+			console.log("FILTERS READY")
 			if (window.location.pathname === "/all-products") {
 
 				const queryString = window.location.search
@@ -86,6 +89,23 @@ $(() => {
 
 
 			}
+		}
+
+		bind_search() {
+			console.log("SEARCH READY")
+			$('input[type=home-search]').on('keydown', (e) => {
+			
+				if (e.keyCode === 13) {
+					// Enter
+				
+					const value = e.target.value;
+					if (value) {
+						window.location = 'all-products?search=' + e.target.value;
+					} else {
+						window.location = '';
+					}
+				}
+			});
 		}
 	}
 	new ProductListing();

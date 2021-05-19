@@ -46,7 +46,7 @@ def get_products_html_for_website_by_category_name(category_name):
 
     if not items:
         html = frappe.render_template(
-            'erpnext/www/all-products/not_found.html', {})
+            'enshop/www/all-products/not_found.html', {})
 
     return html
 
@@ -73,11 +73,36 @@ def get_products_html_for_website_by_category_name_and_group(category_name, grou
 
     html = ''.join(get_html_for_items(items))
 
+    print("JS")
+    print(items)
     if not items:
         html = frappe.render_template(
-            'erpnext/www/all-products/not_found.html', {})
+            'enshop/www/all-products/not_found.html', {})
 
     return html
+
+
+@frappe.whitelist(allow_guest=True)
+def get_products_items_by_category_name_and_group(category_name, group_name):
+    category_name = category_name.replace("&amp;", "&")
+
+    params = ""
+
+    sql_group_child = get_sql_parent_child_group(group_name)
+
+    group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
+
+    for child_list in group_child_list:
+        child_name = child_list.name
+        params = params + 'ti.item_group = "'+child_name+'"'
+        if(group_child_list[-1] != child_list):
+            params = params + " || "
+
+    sql_query = get_sql_query_group(category_name, params)
+
+    items = frappe.db.sql(sql_query, as_dict=1)
+
+    return items
 
 
 def get_html_for_items(items):
@@ -116,7 +141,7 @@ def get_sql_query_group(category_name, params):
 				FROM  tabItem AS ti 
 				INNER JOIN `tabSub Category Child` AS tcc 
 				ON ti.name = tcc.parent 
-				WHERE {0}
+				WHERE ({0})
 				AND tcc.category_name = "{1}"
 		'''.format(params, category_name)
 
