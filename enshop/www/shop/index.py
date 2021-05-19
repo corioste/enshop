@@ -20,9 +20,13 @@ def get_context(context):
     else:
         search = field_filters = attribute_filters = None
 
-    if item_group and categories:
-        context.items = get_products_items_by_category_name_and_group(
-            categories, item_group)
+    if frappe.form_dict:
+        if search:
+            context.items = get_products_for_website(
+                field_filters, attribute_filters, search)
+        if item_group and categories:
+            context.items = get_products_items_by_category_name_and_group(
+                categories, item_group)
     else:
         context.items = get_products_for_website(
             field_filters, attribute_filters, search)

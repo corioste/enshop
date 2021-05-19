@@ -27,7 +27,7 @@
 	<div class="col-12 order-1 col-md-4 order-md-2">
 		{% if frappe.form_dict.start or frappe.form_dict.field_filters or frappe.form_dict.attribute_filters or
 		frappe.form_dict.search %}
-		<a class="mb-3 d-inline-block" href="/all-products">{{ _('Clear filters') }}</a>
+		<a class="mb-3 d-inline-block" href="/shop">{{ _('Clear filters') }}</a>
 		{% endif %}
 
 		<div class="collapse d-md-block" id="product-filters">
@@ -113,10 +113,10 @@
 <div class="row">
 	{% if items %}
 	{% for item in items %}
-	{% include "enshop/www/all-products/item_col.html" %}
+	{% include "enshop/www/shop/item_col.html" %}
 	{% endfor %}
 	{% else %}
-	{% include "enshop/www/all-products/not_found.html" %}
+	{% include "enshop/www/shop/not_found.html" %}
 	{% endif %}
 </div>
 <div class="row">

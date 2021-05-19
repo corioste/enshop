@@ -46,7 +46,7 @@ def get_products_html_for_website_by_category_name(category_name):
 
     if not items:
         html = frappe.render_template(
-            'enshop/www/all-products/not_found.html', {})
+            'enshop/www/shop/not_found.html', {})
 
     return html
 
@@ -77,7 +77,7 @@ def get_products_html_for_website_by_category_name_and_group(category_name, grou
     print(items)
     if not items:
         html = frappe.render_template(
-            'enshop/www/all-products/not_found.html', {})
+            'enshop/www/shop/not_found.html', {})
 
     return html
 
@@ -108,7 +108,7 @@ def get_products_items_by_category_name_and_group(category_name, group_name):
 def get_html_for_items(items):
     html = []
     for item in items:
-        html.append(frappe.render_template('enshop/www/all-products/item_col.html', {
+        html.append(frappe.render_template('enshop/www/shop/item_col.html', {
             'item': item
         }))
     return html

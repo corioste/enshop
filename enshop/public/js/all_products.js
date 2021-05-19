@@ -9,7 +9,7 @@ $(() => {
 		}
 		bind_filters() {
 			console.log("FILTERS READY")
-			if (window.location.pathname === "/all-products") {
+			if (window.location.pathname === "/shop") {
 
 				const queryString = window.location.search
 				const urlParams = new URLSearchParams(queryString);
@@ -58,7 +58,7 @@ $(() => {
 
 				$('.select-category').on('click', function () {
 					const new_params = queryString + "&categories=" + this.text.trim()
-					window.location = 'all-products' + new_params
+					window.location = 'shop' + new_params
 				});
 			}
 
@@ -80,7 +80,7 @@ $(() => {
 
 							$('.select-category').on('click', function () {
 								const new_params = queryString + "&categories=" + encodeURIComponent(this.text.trim())
-								window.location = 'all-products' + new_params
+								window.location = 'shop' + new_params
 							});
 						} else {
 							$('.card').html("<div>No Categories Found</div>");
@@ -100,7 +100,7 @@ $(() => {
 				
 					const value = e.target.value;
 					if (value) {
-						window.location = 'all-products?search=' + e.target.value;
+						window.location = 'shop?search=' + e.target.value;
 					} else {
 						window.location = '';
 					}
