@@ -6,23 +6,26 @@
 <div class="enshop-section__content">
     {% for featured_categories_card in range (row,featured_categories_cards|length) %}
     {% set card_limiter = 0 + loop.index%}
-    {% if card_limiter <= 3 %}
-    <a class="enshop-section__content__col select-category" style="cursor: pointer;">
+    {% if card_limiter <= 3 %} <a class="enshop-section__content__col select-category" style="cursor: pointer;">
         <div style="height: 88%;">
-            <img class="img-responsive" src="{{ featured_categories_cards[featured_categories_card].imageurl }}">
+            {% if featured_categories_cards[featured_categories_card].attach_image_3 is not none %}
+            <img class="img-responsive" src="{{ featured_categories_cards[featured_categories_card].attach_image_3 }}">
+            {% else %}
+            <img class="img-responsive" src="https://via.placeholder.com/400x250">
+            {%endif%}
         </div>
         <div class="text">
-            {{ featured_categories_cards[featured_categories_card].label }}
+            {{ featured_categories_cards[featured_categories_card].category_name }}
         </div>
-    </a>
-    {%endif%}
-    {% endfor %}
+        </a>
+        {%endif%}
+        {% endfor %}
 </div>
 {% endfor %}
 </div>
 {% else %}
-    <div>No Categories</div>
-    <a class="enshop-section__content__col select-category" href="all-products">
-        <div>View All Products</div>
-    </a>
+<div>No Categories</div>
+<a class="enshop-section__content__col select-category" href="all-products">
+    <div>View All Products</div>
+</a>
 {% endif %}

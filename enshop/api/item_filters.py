@@ -22,12 +22,13 @@ def get_categories_from_group(group_name):
 
     categories_list = frappe.db.sql(categories, as_dict=1)
 
-    all_categories = _get_featured_cards("featured_categories_cards")
+    all_categories = _get_featured_cards()
 
     for category_x in all_categories:
         for category_y in categories_list:
-            if category_x.label == category_y.category_name:
-                final_category_list.append(category_x)
+            if category_x.category_name == category_y.category_name:
+                if category_x.show_in_website == 1:
+                    final_category_list.append(category_x)
 
     html = frappe.render_template('enshop/www/filter-categories/categories-row.html', {
                                   "featured_categories_cards": final_category_list})
@@ -98,7 +99,7 @@ def get_products_items_by_category_name_and_group(category_name, group_name):
         if(group_child_list[-1] != child_list):
             params = params + " || "
 
-    sql_query = get_sql_query_group(category_name, params)
+    sql_query = get_sql_query_group_with_page(category_name, params)
 
     items = frappe.db.sql(sql_query, as_dict=1)
 
@@ -127,6 +128,28 @@ def get_sql_query(category_name):
 				INNER JOIN `tabSub Category Child` AS tcc 
 				ON ti.name = tcc.parent 
 				WHERE tcc.category_name = "{0}"'''.format(category_name)
+
+
+def get_sql_query_group_with_page(category_name, params):
+    start = frappe.form_dict.start or 0
+    products_settings = get_product_settings()
+    page_length = products_settings.products_per_page
+    return '''SELECT 
+					ti.name, 
+					ti.item_name, 
+					ti.website_image, 
+					ti.image, 	
+					ti.web_long_description , 
+					ti.description , 
+					ti.route  
+				FROM  tabItem AS ti 
+				INNER JOIN `tabSub Category Child` AS tcc 
+				ON ti.name = tcc.parent 
+				WHERE ({0})
+				AND tcc.category_name = "{1}"
+                LIMIT {2}
+                OFFSET {3}
+		'''.format(params, category_name, page_length, start)
 
 
 def get_sql_query_group(category_name, params):
@@ -158,9 +181,14 @@ def get_categories_from_group_parent(group_names):
 		WHERE {0}'''.format(group_names)
 
 
-def _get_featured_cards(parentfield):
+def _get_featured_cards():
     return frappe.get_all(
-        "Enshop Settings Card",
-        fields=["label", "imageurl"],
-        filters={"parentfield": parentfield}
+        "Sub Category",
+        fields=["show_in_website", "category_name", "attach_image_3"]
     )
+
+
+def get_product_settings():
+    doc = frappe.get_cached_doc('Products Settings')
+    doc.products_per_page = doc.products_per_page or 20
+    return doc
