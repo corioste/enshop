@@ -8,8 +8,6 @@
   "banner",
   "most_popular_sb",
   "most_popular_cards",
-  "featured_categories_sb",
-  "featured_categories_cards",
   "featured_item_group_section",
   "featured_item_group"
  ],
@@ -20,21 +18,10 @@
    "label": "Most Popular"
   },
   {
-   "fieldname": "featured_categories_sb",
-   "fieldtype": "Section Break",
-   "label": "Featured Categories"
-  },
-  {
    "fieldname": "most_popular_cards",
    "fieldtype": "Table",
    "label": "Most Popular",
    "options": "Enshop Settings Card Most Popular"
-  },
-  {
-   "fieldname": "featured_categories_cards",
-   "fieldtype": "Table",
-   "label": "Featured Categories",
-   "options": "Enshop Settings Card"
   },
   {
    "fieldname": "featured_item_group_section",
@@ -60,7 +47,7 @@
   }
  ],
  "issingle": 1,
- "modified": "2021-01-18 01:20:55.300428",
+ "modified": "2021-05-19 23:11:09.410898",
  "modified_by": "Administrator",
  "module": "Enshop",
  "name": "Enshop Settings",
