@@ -67,7 +67,7 @@ a.enshop-section__content__col:hover {
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: #fff;
 }
 
 .btn-style-left {
@@ -129,4 +129,8 @@ body {
     0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
     0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+}
+
+.main-items {
+  height: 566px;
 }

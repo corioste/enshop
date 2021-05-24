@@ -126,34 +126,37 @@
             </div>
         </div>
     </div>
-    <div class="feautured-text">
-        <span class="text-1">Most</span>&nbsp;&nbsp;&nbsp;<span class="text-2">Popular</span>
-    </div>
-    <div class="container" style="max-width: 1465px;">
-        <div class="">
-            {% for row in range(0,most_popular_cards|length,3) %}
-            <div class="row">
-                {% for most_popular_card in range(row,most_popular_cards|length) %}
+    <div style="background-color: white;">
+        <div class="feautured-text">
+            <span class="text-1">Most</span>&nbsp;&nbsp;&nbsp;<span class="text-2">Popular</span>
+        </div>
+        <div class="container" style="max-width: 1465px;">
+            <div class="">
+                {% for row in range(0,most_popular_cards|length,3) %}
+                <div class="row">
+                    {% for most_popular_card in range(row,most_popular_cards|length) %}
 
-                <div class=col>
+                    <div class=col>
 
-                    <a href="{{ most_popular_cards[most_popular_card].hyperlink }}">
-                        <div class="card shadow" style="height: 450px; width: 400px;
+                        <a href="{{ most_popular_cards[most_popular_card].hyperlink }}">
+                            <div class="card shadow" style="height: 500px; 
                     font-weight: bold;">
-                            <div style="height: 88%; padding: 20px;">
-                                <img class="img-responsive" src="{{  most_popular_cards[most_popular_card].imageurl }}">
+                                <div style="height: 88%; padding: 20px;">
+                                    <img class="img-responsive"
+                                        src="{{  most_popular_cards[most_popular_card].imageurl }}">
+                                </div>
+                                <div style="padding: 10px;">
+                                    <span style="color: black;">
+                                        {{ most_popular_cards[most_popular_card].label }}
+                                    </span>
+                                </div>
                             </div>
-                            <div style="padding: 10px;">
-                                <span style="color: black;">
-                                    {{ most_popular_cards[most_popular_card].label }}
-                                </span>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
                 {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@1.3.3/dist/js/splide.min.js"></script>
