@@ -6,10 +6,9 @@
     <div>No Products</div>
 
     {% else %}
-
+    {{category}}
     {% if category|length != 0 %}
-
-
+    {{category}}
     {% for row in range(0,category|length,4) %}
 
     <div class="row" style="height: 375px;">

@@ -13,3 +13,22 @@ const getQueryParams = (name, url) => {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
+
+$(() => {
+    class ProductListing {
+        constructor() {
+            this.restore_filters_state();
+        }
+
+
+        restore_filters_state() {
+            console.log("TEST")
+        }
+    }
+
+    new ProductListing();
+
+
+});
+
+
