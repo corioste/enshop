@@ -24,7 +24,7 @@ update_website_context = ["enshop.utils.update_website_context",
 # include js, css files in header of web template
 web_include_css = "/assets/css/enshop-web.css"
 # web_include_js = "/assets/enshop/js/enshop.js"
-web_include_js = "/assets/enshop/js/all_products.js"
+web_include_js = "/assets/enshop/js/loader.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}

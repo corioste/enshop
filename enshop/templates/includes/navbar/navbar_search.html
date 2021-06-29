@@ -1,6 +1,3 @@
-<li>
-	<form action='/shop'>
-		<input name='search' class='form-control navbar-search' type='text' value='{{ frappe.form_dict.q or ''}}' {% if
-			not frappe.form_dict.q%}placeholder="{{ _(" Search...") }}"{% endif %}>
-	</form>
+<li class="nav-item">
+	<div class="nav-link clickMore"><i class="fa fa-search" aria-hidden="true"></i></div>
 </li>

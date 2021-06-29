@@ -5,7 +5,6 @@
  "engine": "InnoDB",
  "field_order": [
   "item_group",
-  "data_2",
   "label",
   "imageurl",
   "image_file"
@@ -37,15 +36,10 @@
    "fieldname": "image_file",
    "fieldtype": "Attach Image",
    "label": "Image File"
-  },
-  {
-   "fieldname": "data_2",
-   "fieldtype": "Data",
-   "in_filter": 1
   }
  ],
  "istable": 1,
- "modified": "2021-02-10 05:04:22.337121",
+ "modified": "2021-05-25 23:08:54.247488",
  "modified_by": "Administrator",
  "module": "Enshop",
  "name": "Enshop Group Card",

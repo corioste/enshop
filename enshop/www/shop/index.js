@@ -1,3 +1,30 @@
+$(document).ready(function () {
+
+	// Lift card and show stats on Mouseover
+	$('.product-card').hover(function () {
+		console.log("HOVER")
+		$(this).addClass('animate');
+		$('div.carouselNext, div.carouselPrev').addClass('visible');
+	}, function () {
+		$(this).removeClass('animate');
+		$('div.carouselNext, div.carouselPrev').removeClass('visible');
+	});
+
+
+});
+
+frappe.ready(() => {
+	$('.btn-prev, .btn-next').click((e) => {
+		const $btn = $(e.target);
+		$btn.prop('disabled', true);
+		const start = $btn.data('start');
+		let query_params = frappe.utils.get_query_params();
+		query_params.start = start;
+		let path = window.location.pathname + '?' + frappe.utils.get_url_from_dict(query_params);
+		window.location.href = path;
+	});
+});
+
 $(() => {
 	class ProductListing {
 		constructor() {
@@ -21,7 +48,7 @@ $(() => {
 
 		restore_filters_state() {
 			const filters = frappe.utils.get_query_params();
-			let {field_filters, attribute_filters} = filters;
+			let { field_filters, attribute_filters } = filters;
 
 			if (field_filters) {
 				field_filters = JSON.parse(field_filters);
@@ -71,4 +98,16 @@ $(() => {
 		}
 		return exists ? obj : undefined;
 	}
+});
+
+
+$('.add_to_cart').on('click', function () {
+	var item_code = $(this).attr('data-item-code')
+	erpnext.shopping_cart.update_cart({
+		item_code,
+		qty: 1,
+		callback(r) {
+			console.log(r)
+		}
+	});
 });

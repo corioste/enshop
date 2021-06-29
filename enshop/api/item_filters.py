@@ -11,7 +11,7 @@ def get_categories_from_group(group_name):
     sql_group_child = get_sql_parent_child_group(group_name)
 
     group_child_list = frappe.db.sql(sql_group_child, as_dict=1)
-
+    print(group_child_list)
     for child_list in group_child_list:
         child_name = child_list.name
         params = params + 'ti.item_group = "'+child_name+'"'
@@ -30,10 +30,7 @@ def get_categories_from_group(group_name):
                 if category_x.show_in_website == 1:
                     final_category_list.append(category_x)
 
-    html = frappe.render_template('enshop/www/filter-categories/categories-row.html', {
-                                  "featured_categories_cards": final_category_list})
-
-    return html
+    return final_category_list
 
 
 @frappe.whitelist(allow_guest=True)

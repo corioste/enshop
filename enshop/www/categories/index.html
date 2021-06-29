@@ -1,0 +1,82 @@
+<main>
+    <div class="feautured-text">
+        <h2>Shop By <b>Categories</b></h2>
+    </div>
+    {% if category == None %}
+    <div>No Products</div>
+
+    {% else %}
+
+    {% if category|length != 0 %}
+
+
+    {% for row in range(0,category|length,4) %}
+
+    <div class="row" style="height: 375px;">
+        {% for col in range(row,category|length) %}
+        {% set card_limit = 0 + loop.index%}
+        {% if card_limit <= 4 %}<div class="col-md-3">
+            <a class="select-category" style="cursor: pointer;">
+                <div class="category-container col margin_bottom">
+                    <div>
+                        <div class="thumb-wrapper">
+                            <div class="img-box">
+                                <img src="https://gaserp.tailerp.com{{ category[col].attach_image_3 }}"
+                                    class="img-fluid" alt="">
+                            </div>
+                            <div>
+                                {{category[col].category_name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+
+
+    {% endfor %}
+
+
+
+
+    {% else %}
+
+    {% for row in range(0,featured_item_group|length,4) %}
+    <div class="row" style="height: 375px;">
+        {% for featured_category in range(row,featured_item_group|length) %}
+        {% set card_limit = 0 + loop.index%}
+        {% if card_limit <= 4 %} <div class="col-md-3">
+            <a style="color: black;
+            text-decoration: none;" href="categories?item_group={{featured_item_group[featured_category].item_group}}">
+                <div class="category-container col margin_bottom">
+
+                    <div>
+                        <div class="thumb-wrapper">
+                            <div class="img-box">
+                                <img src="{{ featured_item_group[featured_category].imageurl }}" class="img-fluid"
+                                    alt="">
+                            </div>
+                            <div>
+                                {{featured_item_group[featured_category].label}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+
+
+    {% endfor %}
+
+    {% endif %}
+    {% endif %}
+
+
+</main>

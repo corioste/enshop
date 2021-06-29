@@ -9,8 +9,6 @@ sitemap = 1
 
 def get_context(context):
 
-    print("SEARCHING")
-
     if frappe.form_dict:
         search = frappe.form_dict.search
         field_filters = frappe.parse_json(frappe.form_dict.field_filters)
@@ -18,6 +16,9 @@ def get_context(context):
             frappe.form_dict.attribute_filters)
         item_group = frappe.form_dict.item_group
         categories = frappe.form_dict.categories
+
+        context.item_group = item_group
+        context.categories = categories
 
     else:
         search = field_filters = attribute_filters = None
@@ -44,5 +45,3 @@ def get_context(context):
     context.page_length = product_settings.products_per_page
 
     context.no_cache = 1
-
-    print(context.items)

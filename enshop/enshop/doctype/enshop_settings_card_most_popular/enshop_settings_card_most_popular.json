@@ -8,7 +8,11 @@
   "label",
   "hyperlink",
   "imageurl",
-  "image_file"
+  "image_file",
+  "price",
+  "old_price",
+  "is_hot",
+  "item_rate"
  ],
  "fields": [
   {
@@ -43,10 +47,32 @@
    "fieldname": "image_file",
    "fieldtype": "Attach Image",
    "label": "Image File"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Data",
+   "label": "Price"
+  },
+  {
+   "fieldname": "old_price",
+   "fieldtype": "Data",
+   "label": "Old Price"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_hot",
+   "fieldtype": "Check",
+   "label": "Is Hot"
+  },
+  {
+   "fieldname": "item_rate",
+   "fieldtype": "Select",
+   "label": "Item Star Rate",
+   "options": "1 Star\n2 Star\n3 Star\n4  Star\n5 Star"
   }
  ],
  "istable": 1,
- "modified": "2021-01-18 02:23:41.089050",
+ "modified": "2021-06-27 08:40:51.744932",
  "modified_by": "Administrator",
  "module": "Enshop",
  "name": "Enshop Settings Card Most Popular",

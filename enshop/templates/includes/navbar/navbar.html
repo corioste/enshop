@@ -1,15 +1,56 @@
+<style>
+	.showMore {
+		background-color: white;
+		height: 170px;
+		display: block;
+		position: absolute;
+		width: 100%;
+		z-index: 2000;
+	}
+
+	.clickMore {
+		cursor: pointer;
+	}
+</style>
+<div class="showMore" style="display: none; position: fixed;">
+
+	<div class="container" style="padding: 30px;">
+		<div style="text-align: right;"><i class="close-search fa fa-times" style=" cursor: pointer; color: #777777;"
+				aria-hidden="true"></i>
+		</div>
+		<div style="    font-family: 'Hind', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 22px;
+		color: #777777;">
+			What are you Looking for ?
+		</div>
+
+		<form name="search-form" action='/shop'>
+			<div class="row" style="border-bottom: 2px solid black; margin-left: -1px;">
+				<div class="col-11" style="padding: 0px;"><input name='search' class='form-control navbar-search'
+						type='text' value='{{ frappe.form_dict.q or ''}}' {% if not frappe.form_dict.q%}
+						placeholder=" Search for products" {% endif %} style="border: 0px;
+				border-radius: 0;
+				padding: 0px;
+				box-shadow: none;"></div>
+				<div class="col-1" style="text-align: right;
+				cursor: pointer;">
+					<i class="handle-search fa fa-search" style=" cursor: pointer;" aria-hidden="true"></i>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+</div>
 <nav class="navbar navbar-light bg-white navbar-expand-lg sticky-top shadow-sm">
-	<div class="container">
-		<a class="navbar-brand" href="{{ url_prefix }}{{ home_page or "/" }}">
+	<div class="container" style="max-width: 1600px;">
+		<a class="navbar-brand" href="{{ url_prefix }}{{ home_page or " /" }}">
 			<span>{{ brand_html or (frappe.get_hooks("brand_html") or ["Home"])[0] }}</span>
 		</a>
-		<button class="navbar-toggler" type="button"
-			data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent"
-			aria-expanded="false"
-			aria-label="Toggle navigation"
-		>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
@@ -17,4 +58,5 @@
 			{% include "templates/includes/navbar/navbar_items.html" %}
 		</div>
 	</div>
+
 </nav>

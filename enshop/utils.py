@@ -11,7 +11,8 @@ def update_website_context(context):
 def _get_most_popular_cards(parentfield):
     return frappe.get_all(
         "Enshop Settings Card Most Popular",
-        fields=["label", "hyperlink", "imageurl"],
+        fields=["label", "hyperlink", "imageurl",
+                "price", "old_price", "is_hot", "item_rate", "item_code"],
         filters={"parentfield": parentfield}
     )
 
@@ -19,7 +20,7 @@ def _get_most_popular_cards(parentfield):
 def _get_featured_item_group_cards(parentfield):
     return frappe.get_all(
         "Enshop Group Card",
-        fields=["label", "imageurl"],
+        fields=["label", "imageurl", "item_group"],
         filters={"parentfield": parentfield}
     )
 
